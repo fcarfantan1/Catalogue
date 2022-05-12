@@ -1,0 +1,76 @@
+{extends file="admin-layout.tpl"}
+{block name='no-return-functions'}
+    {$breadcrumbs = [['title' => {intl l="Add a feast"}, 'url'=>{url file='module_update'}]]}
+{/block}
+{block name="main-content"}
+<div class="general-block-decorator">
+    <div class="row">
+{$breadcrumbs = [['title' => {intl l="Update a feast"}, 'url'=>{url file='module_update'}]]}
+        <div class="col-md-12 title title-without-tabs">
+            {intl  l='Update a feast'}
+        </div>
+
+        <div class="form-container">
+            <div class="col-md-12">
+
+            {form name="fetes.modification.form"}
+                <form method="POST" id="hookfetes-form" action="{url path="/admin/hookfetes/save"}" {form_enctype} class="clearfix">
+
+                    {form_hidden_fields}
+                    {form_field field='id'}
+                       <input type="hidden" name="{$name}" value="{$fete_id}" />
+                   {/form_field}
+                    {form_field field='title'}
+                    <div class="form-group {if $error}has-error{/if}">
+                        <label for="{$label_attr.for}" class="control-label">{$label} : </label>
+                        <input type="text" id="{$label_attr.for}" name="{$name}" class="form-control" data-"{$value}" value="{$value}" title="{$label}">
+                    </div>
+                    {/form_field}
+
+                    {form_field field='city'}
+                    <div class="form-group {if $error}has-error{/if}">
+                        <label for="{$label_attr.for}" class="control-label">{$label} : </label>
+                        <input type="text" id="{$label_attr.for}" name="{$name}" class="form-control" value="{$value}" title="{$label}">
+                    </div>
+                    {/form_field}
+
+                    {form_field field='department'}
+                    <div class="form-group {if $error}has-error{/if}">
+                        <label for="{$label_attr.for}" class="control-label">{$label} : </label>
+                        <input type="text" id="{$label_attr.for}" name="{$name}" class="form-control" value="{$value}" title="{$label}">
+                    </div>
+                    {/form_field}
+
+                    {form_field field='begin'}
+                    <div class="form-group {if $error}has-error{/if}">
+                        <label for="{$label_attr.for}" class="control-label">{$label} : </label>
+                        <input type="date" id="{$label_attr.for}" name="{$name}" class="form-control" value="{$value}" title="{$label}">
+                    </div>
+                    {/form_field}
+                    
+                    {form_field field='end'}
+                    <div class="form-group {if $error}has-error{/if}">
+                        <label for="{$label_attr.for}" class="control-label">{$label} : </label>
+                        <input type="date" id="{$label_attr.for}" name="{$name}" class="form-control" value="{$value}" title="{$label}">
+                    </div>
+                    {/form_field}
+
+                    {form_field field='url'}
+                    <div class="form-group {if $error}has-error{/if}">
+                        <label for="{$label_attr.for}" class="control-label">{$label} : </label>
+                        <input type="text" id="{$label_attr.for}" name="{$name}" class="form-control" value="{$value}" title="{$label}">
+                    </div>
+                    {/form_field}
+
+
+                    <button type="submit" id="hookfetes-save" name="hookfetes_save" value="save" class="form-submit-button btn btn-sm btn-default" title="{intl d='hookfetes.bo.default' l='Save'}">{intl d='hookfetes.bo.default' l='Save'}</button>
+                </form>
+            {/form}
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{/block}

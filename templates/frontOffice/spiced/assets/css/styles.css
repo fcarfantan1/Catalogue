@@ -1,0 +1,145 @@
+html{
+	padding: 0 50px 0 50px;
+	height:29.7cm;
+	width:21cm
+}
+body {
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    position: relative;
+    font-family: "Arial Narrow",Arial,sans-serif;
+
+}
+.titre-colonne .titre-ligne{
+	border-color: green;
+    border-style: solid;
+    border-width: 1px;
+}
+.div-image-catalogue{
+	width: 300px;
+    margin: 50px auto 50px auto;
+}
+.div-image-catalogue img{
+	width: 300px;
+    margin: auto;
+}
+.titre-bandeau{
+	font-size: 4em;
+    text-align: center;
+    color: green;
+}
+.sous-titre-bandeau{
+	font-size: 2.5em;
+	text-align:center;
+}
+.titre-catalogue{
+	font-size:3em;
+	text-align:center;
+}
+.div-section{
+	margin-right: 130px;
+	height:170px;
+}
+.titre_section{
+ height: 50px;
+}
+.content-section{
+	position: relative;
+    top: -112px;
+	/* margin-right: 130px; */
+	padding-right: 15px;
+}
+.code-tarif{
+font-size: 18px;
+font-style: italic;
+font-family: helvetica;
+color: #8e4848;
+text-align: center;
+position: absolute;
+top: -1em;
+}
+.img-fougere{
+	height: 135px;
+	width: 135px;
+    position: relative;
+    left: 648px;
+}
+.div-image{
+	width:135px;
+	height:135px;
+	position:relative;
+	top:-50px;
+}
+.nom{
+  float:left;
+}
+.famille {
+    float: right;
+    margin-right: 100px;
+}
+img .fougere{
+	float:left;
+
+}
+.description{
+	margin-top: 10px;
+    font-style: normal;
+}
+hr{
+	border-color:#2f2fab;
+	margin: 20px 0 10px 0;
+}
+.entete-haut{
+  height: 4em; /* hauteur du parent */
+  font-weight: bold;
+  white-space: nowrap; /* interdiction de passer à la ligne */
+  color: #405f29;
+}
+.entete-haut, .entete-bas{
+	 color: #405f29;
+}
+.intitule{
+	position: relative;
+	left: 450px;
+	top: -14px;
+	font-family:"Times";
+	font-style: italic;
+	font-size: 18px;
+
+
+}
+.societe{
+	position: relative;
+	top: 10px;
+	
+	font-size: 30px;
+ 
+}
+.adresse{
+	position: relative;
+    font-weight: bold;
+	top: 20px;
+	font-family:"Times";
+	font-style: italic;
+	font-size: 18px;
+
+}
+.siret{
+	position:relative;
+	font-family:"Helvetica";
+	font-style: italic;
+	left: 550px;
+}
+.titre_section .nom{
+	font-family:"Helvetica";
+	font-weight: 600;
+	font-size: 20px;
+}
+.postcriptum{
+	font-style: italic;
+	font-size: 18px;
+	margin-top: -35px;
+}
+.titre-postscriptum{
+	font-weight: 600;
+}

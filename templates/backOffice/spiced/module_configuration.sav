@@ -1,0 +1,99 @@
+
+<div class="general-block-decorator">
+		<div class="row">
+			<div class="col-md-12 title title-without-tabs">
+				{intl l='Edit your catalogue.' d='catalogue.bo.default'}
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-container">
+					{form name="catalogue.image"}
+						<form method="POST" action="{url path="/admin/module/catalogue/upload"}" {form_enctype} class="clearfix">
+							{form_hidden_fields}
+							{form_field field='file'}
+								<div class="form-group {if $error}has-error{/if}">
+									<label for="{$label_attr.for}" class="control-label">{intl d='catalogue.bo.default' l='Add an image to the catalogue'}</label>
+									<div class="input-group">
+										<input type="file" id="{$label_attr.for}" {if $required}required="required"{/if} name="{$name}" value="{$value}" title="{intl l='catalogue image' d='catalogue.bo.default'}" placeholder="{intl l='catalogue image' d='catalogue.bo.default'}" class="form-control">
+										<span class="input-group-btn">
+											<input type="submit" class="form-submit-button btn btn-sm btn-success" value="{intl d='catalogue.bo.default' l='Add this image to the catalogue'}" >
+										</span>
+									</div>
+								</div>
+							{/form_field}
+						</form>
+					{/form}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-md-12 title title-without-tabs">
+					{intl l='Image de Couverture' d='catalogue.bo.default'}
+				</div>
+		</div>
+		
+		<div class="row">
+				<div class="col-md-12">
+					<div class="form-container">
+						
+							{form name="catalogue.update.form"}
+							<form method="post" action="{url path="/admin/module/catalogue/update"}" {form_enctype} class="clearfix">
+		
+								<!-- {include
+									file = "includes/inner-form-toolbar.html"
+									page_url   = "{url path='/admin/module/catalogue'}"
+									close_url  = "{url path='/admin/modules'}"
+								} -->
+							{form_hidden_fields}
+							{loop name="catalogue.image" type="config" width="550" height="200" resize_mode="borders" backend_context="1" lang="$edit_language_id" limit="1"}
+							<div class="well well-sm">
+								<div class="row">
+									<div class="col-md-6">
+										<p>
+											<a href="{$ORIGINAL_IMAGE_URL}" class="thumbnail" target="_blank">
+												<img src="{$IMAGE_URL}" alt="{$ALT}">
+											</a>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+									{render_form_field field="title" value=$TITLE}
+									{render_form_field field="subtitle" value=$SUBTITLE}
+									{render_form_field field="titre_date_debut" value=$TITRE_DATE_DEBUT}
+									{render_form_field field="responsable_nom" value=$RESPONSABLE_NOM}
+									{render_form_field field="responsable_prenom" value=$RESPONSABLE_PRENOM}
+									{render_form_field field="tel_fixe" value=$TEL_FIXE}
+									{render_form_field field="tel_mobile" value=$TEL_MOBILE}
+									{render_form_field field="adresse_voie" value=$ADRESSE_VOIE}
+									{render_form_field field="adresse_codepostal" value=$ADRESSE_CODEPOSTAL}
+									{render_form_field field="adresse_commune" value=$ADRESSE_COMMUNE}
+									{render_form_field field="siret" value=$SIRET}
+							</div>
+		
+						{/loop}
+						{include
+							file = "includes/inner-form-toolbar.html"
+							page_url   = "{url path='/admin/module/catalogue'}"
+							close_url  = "{url path='/admin/modules'}"
+							page_bottom = true
+						}
+							</form>
+						   {/form}
+						
+				</div>
+		</div>
+	</div>
+
+</div>
+	
+	
+	
+	
+	
+	
+
+
+

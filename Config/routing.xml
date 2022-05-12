@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+   
+     <route id="catalogue.create" path="catalogue/pdf" methods="post,get">
+        <default key="_controller">Catalogue\Controller\Front\CatalogueController::createPdfAction</default>
+    </route>
+     <route id="catalogue.generate" path="admin/module/catalogue/pdf" methods="post,get">
+        <default key="_controller">Catalogue\Controller\Back\CatalogueController::createPdfAction</default>
+    </route>
+     <route id="catalogue.upload.image" path="admin/module/catalogue/upload" methods="post">
+        <default key="_controller">Catalogue\Controller\Back\ConfigurationController::uploadImage</default>
+    </route>
+    <route id="catalogue.upload.pdf" path="admin/module/catalogue/uploadpdfcatalogue" methods="post">
+        <default key="_controller">Catalogue\Controller\Back\ConfigurationController::uploadPdfCatalogue</default>
+    </route>
+    <route id="catalogue.update" path="admin/module/catalogue/update" methods="post">
+        <default key="_controller">Catalogue\Controller\Back\ConfigurationController::updateAction</default>
+    </route>
+    <route id="catalogue.delete" path="admin/module/catalogue/delete" methods="post">
+        <default key="_controller">Catalogue\Controller\Back\ConfigurationController::deleteAction</default>
+    </route>
+   
+
+</routes>

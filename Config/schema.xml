@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="thelia"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="../../../core/vendor/propel/propel/resources/xsd/database.xsd" >
+    <table name="catalogue_pdf_config" namespace="Catalogue\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="title" size="255" type="VARCHAR" />
+        <column name="subtitle" size="255" type="VARCHAR" />
+        <column name="titre_date_debut" type="VARCHAR"/>
+        <column name="file" type="VARCHAR" size="255" />
+        <column name="alt" size="255" type="VARCHAR" />
+        <column name="url" size="255" type="VARCHAR" />
+        <column name="texte_site" size="255" type="VARCHAR"/>
+        <column name="responsable_nom" type="VARCHAR" />
+        <column name="responsable_prenom" type="VARCHAR" />
+        <column name="tel_fixe" type="VARCHAR" />
+        <column name="tel_mobile" type="VARCHAR" />
+        <column name="adresse_voie" type="VARCHAR"/>
+        <column name="adresse_voie_numero" type="VARCHAR"/>
+        <column name="adresse_codepostal" type="VARCHAR"/>
+        <column name="adresse_commune" type="VARCHAR"/>
+        <column name="siret" type="VARCHAR"/>
+        <behavior name="timestampable" />
+        <behavior name="i18n">
+            <parameter name="i18n_columns" value="title,subtitle,titre_date_debut,alt,adresse_voie,texte_site" />
+        </behavior>
+    </table>
+    <table name="catalogue_pdf_file" namespace="Catalogue\Model">
+        <column name="file" type="VARCHAR" size="255"/>
+    </table>
+    <external-schema filename="local/config/schema.xml" referenceOnly="true" />
+</database>

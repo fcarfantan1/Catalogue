@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns="http://thelia.net/schema/dic/config" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
+
+    <loops>
+        <loop name="catalogue" class="Catalogue\Loop\PdfLoop" />
+        <loop name="csv" class="Catalogue\Loop\CsvLoop" />
+        <loop name="catalogue_config" class="Catalogue\Loop\CatalogueLoop"/>
+    </loops>
+     <forms>
+        <form name="catalogue.add.form" class="Catalogue\Form\CatalogueAddForm" />
+        <form name="catalogue.update.form" class="Catalogue\Form\CatalogueUpdateForm" />
+        <form name="catalogue.modification.form" class="Catalogue\Form\CatalogueModificationForm" />
+        <form name="catalogue.creation.form" class="Catalogue\Form\CatalogueCreationForm"/>
+        <form name="catalogue.image" class="Catalogue\Form\CatalogueImageForm"/>
+    </forms>
+    <hooks>
+             <hook id="catalogue.hook.front" class="Catalogue\Hook\FrontHook" scope="request">
+                <tag name="hook.event_listener" event="main.navbar-catalogue" type="front" templates="render:main-navbar-catalogue.html"/>
+            </hook> 
+            <hook id="catalogue.hook.back" class="Catalogue\Hook\BackHook" scope="request">
+                <tag name="hook.event_listener"  event="main.top-menu-tools" type="back" method="onMainTopMenuTools" />
+                <tag name="hook.event_listener" event="module.configuration" type="back" templates="module_configuration.html"/>
+                <tag name="hook.event_listener" event="module.config-js" type="back" templates="js:assets/js/module-configuration.js" />
+            </hook>
+     </hooks>
+</config>
