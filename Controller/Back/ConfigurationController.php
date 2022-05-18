@@ -13,18 +13,18 @@ namespace Catalogue\Controller\Back;
 
 use Thelia\Core\Event\File\FileCreateOrUpdateEvent;
 use Thelia\Core\Event\TheliaEvents;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Thelia\Controller\Admin\BaseAdminController;
 use Thelia\Core\Security\AccessManager;
 use Thelia\Core\Security\Resource\AdminResources;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Thelia\Log\Tlog;
-use Catalogue\Model\Conditionnement;
 use Catalogue\Model\CataloguePdfConfig;
 use Catalogue\Model\CataloguePdfConfigQuery;
+use Catalogue\Model\CataloguePdfDocument;
 use Thelia\Model\Lang;
 use Thelia\Model\LangQuery;
-use Catalogue\Form\CatalogueUpdateForm;
+use Catalogue\Model\CataloguePdfFile;
+use Thelia\Form\Exception\FormValidationException;
 use Thelia\Tools\URL;
 
 
@@ -238,13 +238,73 @@ class ConfigurationController extends BaseAdminController
             $this->validateForm($form);
 
             /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $fileBeingUploaded */
-            $fileBeingUploaded = $request->files->get(sprintf('%s[file]', $form->getName()), null, true);
+            $fileBeingUploaded = $request->files->get(sprintf('%s[import_file]', $form->getName()), null, true);
             Tlog::getInstance()->addDebug("uploadPdfCatalogue :".$fileBeingUploaded);
         }
         catch (FormValidationException $e) {
             $error_message = $this->createStandardFormValidationErrorMessage($e);
         }
 
+    }
+    public function uploadPdf()
+    {
+        if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::CREATE)) {
+            return $response;
+        }
+
+        $request = $this->getRequest();
+        $form = $this->createForm('catalogue.pdf');
+        $error_message = null;
+        try {
+            $vForm = $this->validateForm($form);
+            $configId=CataloguePdfConfigQuery::create()->select('id')->findOne();
+            
+            // $fileBeingUploaded = $request->files->get(sprintf('%s["import_file"]', $form->getName()), null, true);
+            $fileBeingUploaded = $request->files->get('catalogue_pdf')['import_file'];
+            // printf('%s["import_file"]', $form->getName());
+            $fileModel = new CataloguePdfDocument();
+            $fileModel->setConfigId($configId);
+            $fileCreateOrUpdateEvent = new FileCreateOrUpdateEvent(1);
+            
+            $fileCreateOrUpdateEvent->setModel($fileModel);
+            $fileCreateOrUpdateEvent->setUploadedFile($fileBeingUploaded);
+            Tlog::getInstance()->addInfo("FCA ".$fileModel->getUploadDir());
+
+            $this->dispatch(
+                TheliaEvents::DOCUMENT_SAVE,
+                $fileCreateOrUpdateEvent
+            );
+
+            // Compensate issue #1005
+            $langs = LangQuery::create()->find();
+           
+            /** @var Lang $lang */
+            foreach ($langs as $lang) {
+                $fileCreateOrUpdateEvent->getModel()->setLocale($lang->getLocale())->setTitle('')->save();
+            }
+
+            $response =  $this->redirectToConfigurationPage();
+
+        } catch (FormValidationException $e) {
+            $error_message = $this->createStandardFormValidationErrorMessage($e);
+        }
+
+        if (null !== $error_message) {
+            $this->setupFormErrorContext(
+                'catalogue upload',
+                $error_message,
+                $form
+            );
+            Tlog::getInstance()->addError("FCA ".$error_message);
+            $response = $this->render(
+                "module-configure",
+                [
+                    'module_code' => 'Catalogue'
+                ]
+            );
+        }
+
+        return $response;
     }
 
     public function deleteAll()

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<database defaultIdMethod="native" name="thelia"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:noNamespaceSchemaLocation="../../../core/vendor/propel/propel/resources/xsd/database.xsd" >
+<database defaultIdMethod="native" name="thelia" namespace="Catalogue\Model">
     <table name="catalogue_pdf_config" namespace="Catalogue\Model">
         <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
         <column name="title" size="255" type="VARCHAR" />
@@ -25,8 +23,19 @@
             <parameter name="i18n_columns" value="title,subtitle,titre_date_debut,alt,adresse_voie,texte_site" />
         </behavior>
     </table>
-    <table name="catalogue_pdf_file" namespace="Catalogue\Model">
-        <column name="file" type="VARCHAR" size="255"/>
+    <table name="catalogue_pdf_document" namespace="Catalogue\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="config_id"  required="true" type="INTEGER" />
+        <column name="title" size="255" type="VARCHAR" />
+        <column name="file" type="VARCHAR" size="255" />
+        <column name="url" size="255" type="VARCHAR" />
+        <behavior name="i18n">
+            <parameter name="i18n_columns" value="title" />
+        </behavior>
+        <foreign-key foreignTable="catalogue_pdf_config" name="fk_pdf_config_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="config_id" />
+        </foreign-key>
     </table>
+   
     <external-schema filename="local/config/schema.xml" referenceOnly="true" />
 </database>

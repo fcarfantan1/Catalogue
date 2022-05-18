@@ -135,6 +135,15 @@ class CataloguePdfConfig extends BaseCataloguePdfConfig implements FileModelInte
         return $catalogueDir->getUploadDir();
     }
 
+     /**
+     * @return string the path to the upload directory where files are stored, without final slash
+     */
+    public function getDocumentUploadDir()
+    {
+        $catalogueDir = new \Catalogue\Catalogue();
+        return $catalogueDir->getDocumentUploadDir();
+    }
+
     /**
      * @param int $objectId the object ID
      *
@@ -152,7 +161,7 @@ class CataloguePdfConfig extends BaseCataloguePdfConfig implements FileModelInte
      */
     public function getQueryInstance()
     {
-        return CataloguePdfQuery::create();
+        return CataloguePdfConfigQuery::create();
     }
 
     /**

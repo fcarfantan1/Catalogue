@@ -10,11 +10,11 @@
      <route id="catalogue.generate" path="admin/module/catalogue/pdf" methods="post,get">
         <default key="_controller">Catalogue\Controller\Back\CatalogueController::createPdfAction</default>
     </route>
-     <route id="catalogue.upload.image" path="admin/module/catalogue/upload" methods="post">
+     <route id="catalogue.upload.image" path="admin/module/catalogue/upload/image" methods="post">
         <default key="_controller">Catalogue\Controller\Back\ConfigurationController::uploadImage</default>
     </route>
-    <route id="catalogue.upload.pdf" path="admin/module/catalogue/uploadpdfcatalogue" methods="post">
-        <default key="_controller">Catalogue\Controller\Back\ConfigurationController::uploadPdfCatalogue</default>
+    <route id="catalogue.upload.pdf" path="admin/module/catalogue/upload/pdf" methods="post">
+        <default key="_controller">Catalogue\Controller\Back\ConfigurationController::uploadPdf</default>
     </route>
     <route id="catalogue.update" path="admin/module/catalogue/update" methods="post">
         <default key="_controller">Catalogue\Controller\Back\ConfigurationController::updateAction</default>

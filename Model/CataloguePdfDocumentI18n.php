@@ -2,10 +2,10 @@
 
 namespace Catalogue\Model;
 
-use Catalogue\Model\Base\CataloguePdfFileQuery as BaseCataloguePdfFileQuery;
+use Catalogue\Model\Base\CataloguePdfDocumentI18n as BaseCataloguePdfDocumentI18n;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'catalogue_pdf_file' table.
+ * Skeleton subclass for representing a row from the 'catalogue_pdf_document_i18n' table.
  *
  *
  *
@@ -14,7 +14,7 @@ use Catalogue\Model\Base\CataloguePdfFileQuery as BaseCataloguePdfFileQuery;
  * long as it does not already exist in the output directory.
  *
  */
-class CataloguePdfFileQuery extends BaseCataloguePdfFileQuery
+class CataloguePdfDocumentI18n extends BaseCataloguePdfDocumentI18n
 {
 
 }

@@ -28,6 +28,27 @@ CREATE TABLE `catalogue_pdf_config`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- catalogue_pdf_document
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `catalogue_pdf_document`;
+
+CREATE TABLE `catalogue_pdf_document`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `config_id` INTEGER NOT NULL,
+    `file` VARCHAR(255),
+    `url` VARCHAR(255),
+    PRIMARY KEY (`id`),
+    INDEX `fi_pdf_config_id` (`config_id`),
+    CONSTRAINT `fk_pdf_config_id`
+        FOREIGN KEY (`config_id`)
+        REFERENCES `catalogue_pdf_config` (`id`)
+        ON UPDATE RESTRICT
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- catalogue_pdf_config_i18n
 -- ---------------------------------------------------------------------
 
@@ -44,9 +65,27 @@ CREATE TABLE `catalogue_pdf_config_i18n`
     `adresse_voie` VARCHAR(255),
     `texte_site` VARCHAR(255),
     PRIMARY KEY (`id`,`locale`),
-    CONSTRAINT `catalogue_pdf_config_i18n_FK_1`
+    CONSTRAINT `catalogue_pdf_config_i18n_fk_51c521`
         FOREIGN KEY (`id`)
         REFERENCES `catalogue_pdf_config` (`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- catalogue_pdf_document_i18n
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `catalogue_pdf_document_i18n`;
+
+CREATE TABLE `catalogue_pdf_document_i18n`
+(
+    `id` INTEGER NOT NULL,
+    `locale` VARCHAR(5) DEFAULT 'en_US' NOT NULL,
+    `title` VARCHAR(255),
+    PRIMARY KEY (`id`,`locale`),
+    CONSTRAINT `catalogue_pdf_document_i18n_fk_b6ef44`
+        FOREIGN KEY (`id`)
+        REFERENCES `catalogue_pdf_document` (`id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 

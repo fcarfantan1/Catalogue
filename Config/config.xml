@@ -7,16 +7,20 @@
         <loop name="csv" class="Catalogue\Loop\CsvLoop" />
         <loop name="catalogue_config" class="Catalogue\Loop\CatalogueLoop"/>
     </loops>
+    <commands>
+        <command class="Catalogue\Command\CatalogueCommand"/>
+    </commands>
      <forms>
         <form name="catalogue.add.form" class="Catalogue\Form\CatalogueAddForm" />
         <form name="catalogue.update.form" class="Catalogue\Form\CatalogueUpdateForm" />
         <form name="catalogue.modification.form" class="Catalogue\Form\CatalogueModificationForm" />
         <form name="catalogue.creation.form" class="Catalogue\Form\CatalogueCreationForm"/>
         <form name="catalogue.image" class="Catalogue\Form\CatalogueImageForm"/>
+        <form name="catalogue.pdf" class="Catalogue\Form\CataloguePdfForm"/>
     </forms>
     <hooks>
              <hook id="catalogue.hook.front" class="Catalogue\Hook\FrontHook" scope="request">
-                <tag name="hook.event_listener" event="main.navbar-catalogue" type="front" templates="render:main-navbar-catalogue.html"/>
+                <tag name="hook.event_listener" event="main.navbar-catalogue" type="front" method="onMainNavbarCatalogue"/>
             </hook> 
             <hook id="catalogue.hook.back" class="Catalogue\Hook\BackHook" scope="request">
                 <tag name="hook.event_listener"  event="main.top-menu-tools" type="back" method="onMainTopMenuTools" />
@@ -24,4 +28,8 @@
                 <tag name="hook.event_listener" event="module.config-js" type="back" templates="js:assets/js/module-configuration.js" />
             </hook>
      </hooks>
+     <services>
+        <service id="catalogue.pdf.service" class="Catalogue\Services\PdfService">
+        </service>
+    </services> 
 </config>

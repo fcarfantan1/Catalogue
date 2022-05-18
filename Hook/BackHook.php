@@ -1,7 +1,6 @@
 <?php
 namespace Catalogue\Hook;
 use Thelia\Core\Event\Hook\HookRenderBlockEvent;
-use Thelia\Core\Event\Hook\HookRenderEvent;
 use Thelia\Core\Hook\BaseHook;
 use Thelia\Tools\URL;
 

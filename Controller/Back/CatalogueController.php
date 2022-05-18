@@ -1,4 +1,5 @@
 <?php
+
 /*************************************************************************************/
 /*      This file is part of the Thelia package.                                     */
 /*                                                                                   */
@@ -24,6 +25,7 @@ use Thelia\Core\HttpFoundation\Response;
 
 use Thelia\Tools\URL;
 use Catalogue\Loop\PdfLoop;
+use Catalogue\Loop\CsvLoop;
 
 /**
  * Class Configuration
@@ -33,52 +35,19 @@ use Catalogue\Loop\PdfLoop;
 
 class CatalogueController extends BaseAdminController
 {
-    public function createPdfAction(){
+    public function createPdfAction()
+    {
         try {
             $catalogueHtml = $this->renderRaw('catalogue');
             $pdfEvent = new PdfEvent($catalogueHtml);
-    
+
             $this->dispatch(TheliaEvents::GENERATE_PDF, $pdfEvent);
-    
+
             if ($pdfEvent->hasPdf()) {
                 return $this->pdfResponse($pdfEvent->getPdf(), 'catalogue');
             }
-         } catch (\Exception $e) {
-             Tlog::getInstance()->error("erreur de création du catalogue pdf : ".$e);
-         }
-     
-    //   $lang=$this->getRequest()->getSession()->getLang()->getLocale();
-    //    return $this->render('catalogue',['LANG'=>$lang]);
-   }
-   private function baseProductSearch($params)
-    {
-        $productLoop = new PdfLoop($this->getContainer());
-        
-        $productLoop->initializeArgs($params);
-        $resultat = $productLoop->exec($paginate);
-        $export =  "\""."Reference"
-        ."\";\""."Famille"
-        ."\";\""."Nom Botanique"
-        ."\";\""."Description"
-        ."\";\""."Origine"
-        ."\";\r\n";
-        Tlog::getInstance()->info("export : ".$export);
-        foreach($resultat as $item){
-           
-            $export .=
-                "\"".$item->get("REF")
-                ."\";\"".$item->get("FAMILY")
-                ."\";\"".$item->get("TITLE")
-                ."\";\"".preg_replace("/<.?p>/","",$item->get("DESCRIPTION"))
-                ."\";\"".$item->get("ORIGIN")
-                ."\";\r\n";
+        } catch (\Exception $e) {
+            Tlog::getInstance()->error("erreur de création du catalogue pdf : " . $e);
         }
-        
-        return $export;
     }
-   
-  
-   }
-  
-
-
+}
