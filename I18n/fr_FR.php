@@ -3,7 +3,11 @@ return array(
     // 'an english string' => 'La traduction française de la chaine',
     'Title' => 'Titre',
     'Subtitle' => 'Sous-titre',
-    'Display this image in the catalogue' => 'Afficher cette image dans le catalogue',
+    'Display this image in the catalog' => 'Afficher cette image dans le catalogue',
+    'Publish the new catalog' => 'Publier le nouveau catalogue',
+    'Publish the catalog' => 'Publier le catalogue',
+    'Upload the catalog' => 'Téléverser le catalogue',
+    'Edit your catalog' => 'Modifier votre catalogue',
     'The Catalogue Title' => 'Le titre du catalogue',
     'The Catalogue Subtitle' => 'Le sous-titre du catalogue',
     'The available date' => 'A partir du ...',
@@ -15,4 +19,5 @@ return array(
     'Address' => 'Adresse',
     'ZipCode' => 'Code Postal',
     'City' => 'Commune',
+    'Cover image'=>'Image de couverture'
 );

@@ -15,7 +15,7 @@
 					{form_hidden_fields}
 					{form_field field='import_file'}
 					<div class="form-group {if $error}has-error{/if}">
-						<label for="{$label_attr.for}" class="control-label">{intl d='catalogue' l='Upload the new catalog'}</label>
+						<label for="{$label_attr.for}" class="control-label">{intl l='Publish the new catalog' d='catalogue'}</label>
 						<div class="input-group">
 							<input type="file" id="{$label_attr.for}" {if $required}required="required" {/if}
 								name="{$name}" value="{$value}"
@@ -23,10 +23,13 @@
 								placeholder="{intl l='catalogue image' d='catalogue'}" class="form-control">
 							<span class="input-group-btn">
 								<input type="submit" class="form-submit-button btn btn-sm btn-success"
-									value="{intl d='catalogue' l='Upload the catalog'}">
+									value="{intl d='catalogue' l='Publish the catalog'}">
 							</span>
 						</div>
 					</div>
+					{/form_field}
+					{form_field field='catalog_year'}
+						<input id="{$label_attr.for}" type="number" label="{$label}" name="{$name}" min="2022" max="3000">{$label}</input>
 					{/form_field}
 				</form>
 				{/form}
@@ -37,7 +40,7 @@
 <div class="general-block-decorator">
 	<div class="row">
 		<div class="col-md-12 title title-without-tabs">
-			{intl l='Edit your catalogue.' d='catalogue'}
+			{intl l='Edit your catalog' d='catalogue'}
 		</div>
 	</div>
 
@@ -50,8 +53,7 @@
 					{form_hidden_fields}
 					{form_field field='file'}
 					<div class="form-group {if $error}has-error{/if}">
-						<label for="{$label_attr.for}" class="control-label">{intl d='catalogue' l='Display this image
-							in the catalogue'}</label>
+						<label for="{$label_attr.for}" class="control-label">{intl d='catalogue' l='Display this image in the catalog'}</label>
 						<div class="input-group">
 							<input type="file" id="{$label_attr.for}" {if $required}required="required" {/if}
 								name="{$name}" value="{$value}"
@@ -59,7 +61,7 @@
 								placeholder="{intl l='catalogue image' d='catalogue'}" class="form-control">
 							<span class="input-group-btn">
 								<input type="submit" class="form-submit-button btn btn-sm btn-success"
-									value="{intl d='catalogue' l='Display this image in the catalogue'}">
+									value="{intl d='catalogue' l='Display this image in the catalog'}">
 							</span>
 						</div>
 					</div>
@@ -71,7 +73,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 title title-without-tabs">
-			{intl l='Image de Couverture' d='catalogue.bo.default'}
+			{intl l='Cover image' d='catalogue'}
 		</div>
 	</div>
 
@@ -102,7 +104,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<!-- <div class="col-md-6">
 						{render_form_field field="title" value=$TITLE}
 						{render_form_field field="subtitle" value=$SUBTITLE}
 						{render_form_field field="titre_date_debut" value=$TITRE_DATE_DEBUT}
@@ -115,7 +117,7 @@
 						{render_form_field field="adresse_codepostal" value=$ADRESSE_CODEPOSTAL}
 						{render_form_field field="adresse_commune" value=$ADRESSE_COMMUNE}
 						{render_form_field field="siret" value=$SIRET}
-					</div>
+					</div> -->
 
 
 					{/loop}

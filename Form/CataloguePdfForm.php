@@ -41,6 +41,18 @@ class CataloguePdfForm extends BaseForm
                         'for' => 'file'
                     ]
                 ]
+            )
+            ->add(
+                'catalog_year',
+                'number',
+                [
+                    'constraints' => [
+                    ],
+                    'label' => 'Catalog year',
+                    'label_attr' => [
+                        'for' => 'catalog_year'
+                    ]
+                ]
             );
     }
 

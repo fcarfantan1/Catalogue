@@ -8,7 +8,6 @@
         <loop name="catalogue_config" class="Catalogue\Loop\CatalogueLoop"/>
     </loops>
     <commands>
-        <command class="Catalogue\Command\CatalogueCommand"/>
     </commands>
      <forms>
         <form name="catalogue.add.form" class="Catalogue\Form\CatalogueAddForm" />
