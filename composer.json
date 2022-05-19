@@ -1,5 +1,5 @@
 {
-  "name": "thelia/catalogue",
+  "name": "fcarfantan1/catalogue",
   "type": "thelia-module",
   "require": {
       "thelia/installer": "~1.1"
