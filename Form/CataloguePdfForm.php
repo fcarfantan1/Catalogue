@@ -1,4 +1,5 @@
 <?php
+
 /*************************************************************************************/
 /*      This file is part of the Thelia package.                                     */
 /*                                                                                   */
@@ -34,8 +35,8 @@ class CataloguePdfForm extends BaseForm
                 'import_file',
                 'file',
                 [
-                    'constraints' => [
-                    ],
+                    'constraints' => [],
+                    'required' => true,
                     'label' => 'Catalogue file',
                     'label_attr' => [
                         'for' => 'file'
@@ -46,12 +47,13 @@ class CataloguePdfForm extends BaseForm
                 'catalog_year',
                 'number',
                 [
-                    'constraints' => [
-                    ],
-                    'label' => 'Catalog year',
+                    'constraints' => [],
+                    'required' => true,
+                    'label' => 'Publication year',
                     'label_attr' => [
                         'for' => 'catalog_year'
-                    ]
+                    ],
+
                 ]
             );
     }
@@ -62,5 +64,9 @@ class CataloguePdfForm extends BaseForm
     public function getName()
     {
         return 'catalogue_pdf';
+    }
+    public function getCurrentYear()
+    {
+        return date("Y");
     }
 }

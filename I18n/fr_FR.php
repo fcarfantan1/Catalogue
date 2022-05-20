@@ -19,5 +19,6 @@ return array(
     'Address' => 'Adresse',
     'ZipCode' => 'Code Postal',
     'City' => 'Commune',
-    'Cover image'=>'Image de couverture'
+    'Cover image'=>'Image de couverture',
+    'Publication year' => 'Année de publication'
 );

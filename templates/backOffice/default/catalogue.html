@@ -1,0 +1,168 @@
+<html lang="fr" encoding="utf-8">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        #titre_catalogue {
+            font-size: 30;
+            color: #336600;
+            font-family: Arial, sans-serif;
+            font-weight: 700;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #sous-titre_catalogue {
+            font-size: 25;
+            color: rgb(83, 83, 83);
+            font-family: Arial, sans-serif;
+            font-weight: 700;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #date_debut_catalogue {
+            font-size: 25;
+            color: rgb(83, 83, 83);
+            font-family: Arial, sans-serif;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #texte-intro_catalogue {
+            font-size: 20px;
+            color: rgb(83, 83, 83);
+            font-family: Arial, sans-serif;
+            margin-top: 10px;
+            padding: 30 100 0 100;
+            text-align: center;
+        }
+
+        #url_site_catalogue {
+            font-size: 20px;
+            color: rgb(60, 40, 127);
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #responsable_catalogue {
+            font-size: 30px;
+            color: rgb(34, 71, 4);
+            font-family: Arial, sans-serif;
+            font-weight: 400;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #adresse_catalogue,
+        #siret,
+        .tel_catalogue {
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        #siret {
+            margin-top: 10px;
+        }
+
+        .tel_catalogue {
+            margin-top: 5px;
+        }
+
+        #div_tel_catalogue {
+            margin-top: 10px;
+        }
+
+        body {
+            width: 210mm;
+            height: 297mm;
+            padding: 20px 20px 20px 20px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #image_couverture_catalogue img {
+            width: 200mm;
+            margin-left: 60px;
+            margin-top: 10px;
+        }
+
+        .nom {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 50px;
+            margin-left: 55px;
+        }
+
+        .div-image {
+            width: 150px;
+            height: 150px;
+            margin-left: 540px;
+            position: relative;
+            top: 40px;
+        }
+
+        .img-fougere {
+            width: 150px;
+            height: 150px;
+        }
+
+        .description {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            text-align: left;
+            width: 494px;
+            margin-left: 20px;
+            position: relative;
+            top: -200px;
+        }
+
+        .vignette {
+            height: 96mm
+        }
+    </style>
+</head>
+
+<body>
+    {loop name="catalogue.pdf.image" type="catalogue_config" width="550" height="200" resize_mode="borders"
+    backend_context="1" lang="$edit_language_id" limit="1"}
+    <div>
+        <div id="image_couverture_catalogue">
+            <img src="{$IMAGE_URL}" />
+        </div>
+    </div>
+   {/loop}
+       
+    <page></page>
+    {loop name="catalog.pdf.fougères" type="catalogue" }
+    <div class="div-section vignette">
+        <div class="titre_section">
+            <div class="nom">{$TITLE}</div>
+        </div>
+        <div class="div-image">
+            {loop type="image" name="image.main" product=$ID height="200" resize_mode="borders" limit="1"}
+            <img src="{$IMAGE_URL nofilter}" alt="{$TITLE}" class="img-responsive img-fougere" itemprop="image"
+                data-toggle="magnify" />
+            {/loop}
+            {elseloop rel="image.main" }
+            <img src="{image file='assets/img/no_photo.png'}" alt="{$TITLE}" class="img-responsive img-fougere"
+                itemprop="image" data-toggle="magnify" />
+            {/elseloop}
+        </div>
+        <div class="description">{$DESCRIPTION nofilter}
+            {if {$HAS_ORIGIN}}
+            <span class="titre-postscriptum">Origine: </span><span>{$ORIGIN}</span>
+            {/if}
+        </div>
+
+    </div>
+    {/loop}
+</body>
+
+</html>

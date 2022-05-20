@@ -33,7 +33,7 @@ class FrontHook extends BaseHook {
             $pdfEvent->setSourceFilepath($document->getUploadDir() . DS . $document->getFile())
             ->setCacheSubdirectory('catalogue');
             $this->dispatcher->dispatch(TheliaEvents::DOCUMENT_PROCESS, $pdfEvent);
-        return $pdfEvent->getDocumentUrl();
+        return ['url'=>$pdfEvent->getDocumentUrl(),'year'=>$document->getPublicationYear()];
     }
     
 

@@ -28,7 +28,7 @@ use Catalogue\Loop\PdfLoop;
 use Catalogue\Loop\CsvLoop;
 
 /**
- * Class Configuration
+ * Class CatalogueController
  * @package Catalogue\Controller
  * @author Francois Carfantan <f.carfantan@orange.fr>
  */

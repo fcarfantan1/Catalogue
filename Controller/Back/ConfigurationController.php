@@ -21,135 +21,80 @@ use Thelia\Log\Tlog;
 use Catalogue\Model\CataloguePdfConfig;
 use Catalogue\Model\CataloguePdfConfigQuery;
 use Catalogue\Model\CataloguePdfDocument;
+use Catalogue\Model\CataloguePdfDocumentQuery;
 use Thelia\Model\Lang;
 use Thelia\Model\LangQuery;
-use Catalogue\Model\CataloguePdfFile;
 use Thelia\Form\Exception\FormValidationException;
 use Thelia\Tools\URL;
 
 
 
 /**
- * Class Configuration
+ * Class ConfigurationController
  * @package Catalogue\Controller
  * @author Francois Carfantan <f.carfantan@orange.fr>
  */
 class ConfigurationController extends BaseAdminController
 {
-    public function saveAction()
-    {
-        if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::CREATE)) {
-            return $response;
-        }
-        $request = $this->getRequest();
-        $form = $this->createForm('catalogue.add.form');
-         try {
-            $add_form=$this->validateForm($form);
-            $catalogModel=new CataloguePdfConfig();
-            $catalogModel->setTitle($add_form->getData()['title']);
-            $catalogModel->setYear($add_form->getData()['year']);
-            $catalogModel->Save();
-        } 
-        catch (FormValidationException $e) {
-            $error_message = $this->createStandardFormValidationErrorMessage($e);
-        }
+   
+//    public function updateAction()
+//     {
+//         if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::UPDATE)) {
+//             return $response;
+//         }
 
-        $error_message = null;
-        $resp = array(
-            "error" =>  0,
-            "message" => ""
-        );
-       
-       
-       return $this->render('module_add');
-   }
-   public function updateAction()
-    {
-        if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::UPDATE)) {
-            return $response;
-        }
+//         $form = $this->createForm('catalogue.update.form');
 
-        $form = $this->createForm('catalogue.update.form');
+//         $error_message = null;
 
-        $error_message = null;
+//         try {
+//             $updateForm = $this->validateForm($form);
 
-        try {
-            $updateForm = $this->validateForm($form);
+//             $catalogues = CataloguePdfConfigQuery::create();
 
-            $catalogues = CataloguePdfConfigQuery::create();
+//             $locale = $this->getCurrentEditionLocale();
 
-            $locale = $this->getCurrentEditionLocale();
+//             /** @var Catalogue $catalogue */
+//             foreach ($catalogues as $catalogue) {
+//                 $id = $catalogue->getId();
 
-            /** @var Catalogue $catalogue */
-            foreach ($catalogues as $catalogue) {
-                $id = $catalogue->getId();
+//                 $catalogue
+//                     ->setLocale($locale)
+//                     ->setSubtitle($this->getFormFieldValue($updateForm,'subtitle'))
+//                     ->setTitle($this->getFormFieldValue($updateForm, 'title'))
+//                     ->setTitreDateDebut($this->getFormFieldValue($updateForm, 'titre_date_debut'))
+//                     ->setResponsableNom($this->getFormFieldValue($updateForm,'responsable_nom'))
+//                     ->setResponsableNom($this->getFormFieldValue($updateForm,'responsable_nom'))
+//                     ->setResponsablePreNom($this->getFormFieldValue($updateForm,'responsable_prenom'))
+//                     ->setTelFixe($this->getFormFieldValue($updateForm,'tel_fixe'))
+//                     ->setTelMobile($this->getFormFieldValue($updateForm,'tel_mobile'))
+//                     ->setAdresseVoie($this->getFormFieldValue($updateForm,'adresse_voie'))
+//                     ->setTexteSite($this->getFormFieldValue($updateForm,'texte_site'))
+//                     ->setAdresseCodepostal($this->getFormFieldValue($updateForm,'adresse_codepostal'))
+//                     ->setAdresseCommune($this->getFormFieldValue($updateForm,'adresse_commune'))
+//                     ->setSiret($this->getFormFieldValue($updateForm,'siret'))
+//                 ->save();
+//             }
 
-                $catalogue
-                    ->setLocale($locale)
-                    ->setSubtitle($this->getFormFieldValue($updateForm,'subtitle'))
-                    ->setTitle($this->getFormFieldValue($updateForm, 'title'))
-                    ->setTitreDateDebut($this->getFormFieldValue($updateForm, 'titre_date_debut'))
-                    ->setResponsableNom($this->getFormFieldValue($updateForm,'responsable_nom'))
-                    ->setResponsableNom($this->getFormFieldValue($updateForm,'responsable_nom'))
-                    ->setResponsablePreNom($this->getFormFieldValue($updateForm,'responsable_prenom'))
-                    ->setTelFixe($this->getFormFieldValue($updateForm,'tel_fixe'))
-                    ->setTelMobile($this->getFormFieldValue($updateForm,'tel_mobile'))
-                    ->setAdresseVoie($this->getFormFieldValue($updateForm,'adresse_voie'))
-                    ->setTexteSite($this->getFormFieldValue($updateForm,'texte_site'))
-                    ->setAdresseCodepostal($this->getFormFieldValue($updateForm,'adresse_codepostal'))
-                    ->setAdresseCommune($this->getFormFieldValue($updateForm,'adresse_commune'))
-                    ->setSiret($this->getFormFieldValue($updateForm,'siret'))
-                ->save();
-            }
+//             $response =  $this->redirectToConfigurationPage();
 
-            $response =  $this->redirectToConfigurationPage();
+//         } catch (FormValidationException $e) {
+//             $error_message = $this->createStandardFormValidationErrorMessage($e);
+//         }
 
-        } catch (FormValidationException $e) {
-            $error_message = $this->createStandardFormValidationErrorMessage($e);
-        }
+//         if (null !== $error_message) {
+//             $this->setupFormErrorContext(
+//                 'catalogue upload',
+//                 $error_message,
+//                 $form
+//             );
 
-        if (null !== $error_message) {
-            $this->setupFormErrorContext(
-                'catalogue upload',
-                $error_message,
-                $form
-            );
+//             $response = $this->render("module-configure", [ 'module_code' => 'Catalogue' ]);
+//         }
 
-            $response = $this->render("module-configure", [ 'module_code' => 'Catalogue' ]);
-        }
+//         return $response;
 
-        return $response;
-
-    }
-   public function saveUpdateAction()
-    {
-        if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::CREATE)) {
-            return $response;
-        }
-        $request = $this->getRequest();
-    
-        $form = $this->createForm('catalogue.update.form');
-        try {
-            $update_form=$this->validateForm($form);
-            $data = $update_form->getData();
-            $catalogModel=new CataloguePdfConfig();
-            $catalogModel->setTitle($data['title']);
-            $catalogModel->setYear($data['year']);
-            $catalogModel->Save();
-        } 
-        catch (FormValidationException $e) {
-            $error_message = $this->createStandardFormValidationErrorMessage($e);
-        } 
-
-        $error_message = null;
-        $resp = array(
-            "error" =>  0,
-            "message" => ""
-        );
-
-       return $this->redirectToConfigurationPage();
-   }
- 
+//     }
     
     public function uploadImage()
     {
@@ -226,26 +171,26 @@ class ConfigurationController extends BaseAdminController
 
         return $response;
     }
-    public function uploadPdfCatalogue(){
-        if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::CREATE)) {
-            return $response;
-        }
-        Tlog::getInstance()->addDebug("uploadPdfCatalogue");
-        $request = $this->getRequest();
-        $form = $this->createForm('catalogue.file');
-        $error_message = null;
-        try {
-            $this->validateForm($form);
+    // public function uploadPdfCatalogue(){
+    //     if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::CREATE)) {
+    //         return $response;
+    //     }
+    //     Tlog::getInstance()->addDebug("uploadPdfCatalogue");
+    //     $request = $this->getRequest();
+    //     $form = $this->createForm('catalogue.file');
+    //     $error_message = null;
+    //     try {
+    //         $this->validateForm($form);
 
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $fileBeingUploaded */
-            $fileBeingUploaded = $request->files->get(sprintf('%s[import_file]', $form->getName()), null, true);
-            Tlog::getInstance()->addDebug("uploadPdfCatalogue :".$fileBeingUploaded);
-        }
-        catch (FormValidationException $e) {
-            $error_message = $this->createStandardFormValidationErrorMessage($e);
-        }
+    //         /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $fileBeingUploaded */
+    //         $fileBeingUploaded = $request->files->get(sprintf('%s[import_file]', $form->getName()), null, true);
+    //         Tlog::getInstance()->addDebug("uploadPdfCatalogue :".$fileBeingUploaded);
+    //     }
+    //     catch (FormValidationException $e) {
+    //         $error_message = $this->createStandardFormValidationErrorMessage($e);
+    //     }
 
-    }
+    // }
     public function uploadPdf()
     {
         if (null !== $response = $this->checkAuth(AdminResources::MODULE, ['catalogue'], AccessManager::CREATE)) {
@@ -257,18 +202,17 @@ class ConfigurationController extends BaseAdminController
         $error_message = null;
         try {
             $vForm = $this->validateForm($form);
-            $configId=CataloguePdfConfigQuery::create()->select('id')->findOne();
-            
-            // $fileBeingUploaded = $request->files->get(sprintf('%s["import_file"]', $form->getName()), null, true);
+            $configId = CataloguePdfConfigQuery::create()->select('id')->findOne();
+            $fileModel = CataloguePdfDocumentQuery::create()->findOne();
+            if(is_null($fileModel)){
+                $fileModel = new CataloguePdfDocument();
+                $fileModel->setConfigId($configId);
+            }
             $fileBeingUploaded = $request->files->get('catalogue_pdf')['import_file'];
-            // printf('%s["import_file"]', $form->getName());
-            $fileModel = new CataloguePdfDocument();
-            $fileModel->setConfigId($configId);
+            $fileModel->setPublicationYear($this->getFormFieldValue($vForm,'catalog_year'));
             $fileCreateOrUpdateEvent = new FileCreateOrUpdateEvent(1);
-            
             $fileCreateOrUpdateEvent->setModel($fileModel);
             $fileCreateOrUpdateEvent->setUploadedFile($fileBeingUploaded);
-            Tlog::getInstance()->addInfo("FCA ".$fileModel->getUploadDir());
 
             $this->dispatch(
                 TheliaEvents::DOCUMENT_SAVE,
@@ -331,7 +275,8 @@ class ConfigurationController extends BaseAdminController
 
         return $this->redirectToConfigurationPage();
     }
-      /**
+     
+    /**
      * @param Form $form
      * @param string $fieldName
      * @param int $id
@@ -343,15 +288,10 @@ class ConfigurationController extends BaseAdminController
 
         return $value;
     }
-   
      protected function redirectToConfigurationPage()
     {
         return RedirectResponse::create(URL::getInstance()->absoluteUrl('/admin/module/Catalogue'));
     }
-    protected function getUpdateForm()
-    {
-         Tlog::getInstance()->addDebug("FCA");
-        return $this->createForm('catalogue.modification.form');
-    }
+    
  
 }

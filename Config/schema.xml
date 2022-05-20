@@ -4,20 +4,20 @@
         <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
         <column name="title" size="255" type="VARCHAR" />
         <column name="subtitle" size="255" type="VARCHAR" />
-        <column name="titre_date_debut" type="VARCHAR"/>
+        <column name="titre_date_debut" type="VARCHAR" />
         <column name="file" type="VARCHAR" size="255" />
         <column name="alt" size="255" type="VARCHAR" />
         <column name="url" size="255" type="VARCHAR" />
-        <column name="texte_site" size="255" type="VARCHAR"/>
+        <column name="texte_site" size="255" type="VARCHAR" />
         <column name="responsable_nom" type="VARCHAR" />
         <column name="responsable_prenom" type="VARCHAR" />
         <column name="tel_fixe" type="VARCHAR" />
         <column name="tel_mobile" type="VARCHAR" />
-        <column name="adresse_voie" type="VARCHAR"/>
-        <column name="adresse_voie_numero" type="VARCHAR"/>
-        <column name="adresse_codepostal" type="VARCHAR"/>
-        <column name="adresse_commune" type="VARCHAR"/>
-        <column name="siret" type="VARCHAR"/>
+        <column name="adresse_voie" type="VARCHAR" />
+        <column name="adresse_voie_numero" type="VARCHAR" />
+        <column name="adresse_codepostal" type="VARCHAR" />
+        <column name="adresse_commune" type="VARCHAR" />
+        <column name="siret" type="VARCHAR" />
         <behavior name="timestampable" />
         <behavior name="i18n">
             <parameter name="i18n_columns" value="title,subtitle,titre_date_debut,alt,adresse_voie,texte_site" />
@@ -25,10 +25,10 @@
     </table>
     <table name="catalogue_pdf_document" namespace="Catalogue\Model">
         <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
-        <column name="config_id"  required="true" type="INTEGER" />
+        <column name="config_id" required="true" type="INTEGER" />
         <column name="title" size="255" type="VARCHAR" />
         <column name="file" type="VARCHAR" size="255" />
-        <column name="url" size="255" type="VARCHAR" />
+        <column name="publication_year" type="INTEGER" />
         <behavior name="i18n">
             <parameter name="i18n_columns" value="title" />
         </behavior>
@@ -36,6 +36,6 @@
             <reference foreign="id" local="config_id" />
         </foreign-key>
     </table>
-   
+
     <external-schema filename="local/config/schema.xml" referenceOnly="true" />
 </database>

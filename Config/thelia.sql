@@ -38,7 +38,7 @@ CREATE TABLE `catalogue_pdf_document`
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `config_id` INTEGER NOT NULL,
     `file` VARCHAR(255),
-    `url` VARCHAR(255),
+    `publication_year` INTEGER,
     PRIMARY KEY (`id`),
     INDEX `fi_pdf_config_id` (`config_id`),
     CONSTRAINT `fk_pdf_config_id`

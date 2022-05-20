@@ -2,19 +2,11 @@
 
 namespace Catalogue\Loop;
 
-use Propel\Runtime\ActiveQuery\Criteria;
-use Thelia\Core\Event\Image\ImageEvent;
-use Thelia\Core\Event\TheliaEvents;
 use Thelia\Core\Template\Element\LoopResult;
 use Thelia\Core\Template\Element\LoopResultRow;
-use Thelia\Core\Template\Loop\Argument\Argument;
-use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
 use Thelia\Core\Template\Loop\Product;
-use Thelia\Type\EnumListType;
-use Thelia\Type\EnumType;
-use Thelia\Type\TypeCollection;
 use Thelia\log\Tlog;
-use TracabilitePP\Model\ProductLotQuery;
+
 
 /**
  * Class PdfLoop
@@ -26,12 +18,8 @@ class PdfLoop extends Product
   
     public function parseResults(LoopResult $loopResult)
     {
-     $maintenant = date("Y-m-d");
      foreach ($loopResult->getResultDataCollection() as $product) {
         $loopResultRow = new LoopResultRow($product);
-        $price = $product->getVirtualColumn('price');
-        $id=$product->getId();
-        
         $loopResultRow
         ->set("ID", $product->getId())
         ->set("REF", $product->getRef())
@@ -50,11 +38,7 @@ class PdfLoop extends Product
         ->set("POSITION", $product->getVirtualColumn('position_delegate'))
         ->set("VIRTUAL", $product->getVirtual() ? "1" : "0")
         ->set("VISIBLE", $product->getVisible() ? "1" : "0")
-        ->set("TEMPLATE", $product->getTemplateId())
-        ->set("DEFAULT_CATEGORY", $defaultCategoryId)
-        ->set("TAX_RULE_ID", $product->getTaxRuleId())
-        ->set("BRAND_ID", $product->getBrandId() ?: 0)
-        ->set("SHOW_ORIGINAL_PRICE", $display_initial_price);
+        ->set("TEMPLATE", $product->getTemplateId());
         $loopResult->addRow($loopResultRow);
 }
 
@@ -109,25 +93,6 @@ private function parseOrigin($postscriptum){
  }
 }
 private function parseDescription($description){
-//   $pattern="/";
-//   $nbptag=substr_count($description,"<p");
-//   for($i=0;$i<$nbptag;$i++){
-//     $pattern=$pattern."<p>(.*)<\/p>\s*";
-//   }
-//   $pattern=$pattern."/";
-//   if(preg_match($pattern,$description,$matches))
-//   {
-//      if(strlen($matches[$nbptag])>10){
-//       return html_entity_decode($matches[$nbptag]);
-//      }
-//      else{
-//       return html_entity_decode($matches[$nbptag-1]);
-//      }
-    
-//  }
-//  else{
-//     return "";
-//  }
 return html_entity_decode($description);
 
 }
