@@ -4,16 +4,11 @@
 
     <loops>
         <loop name="catalogue" class="Catalogue\Loop\PdfLoop" />
-        <loop name="csv" class="Catalogue\Loop\CsvLoop" />
         <loop name="catalogue_config" class="Catalogue\Loop\CatalogueLoop"/>
     </loops>
     <commands>
     </commands>
      <forms>
-        <form name="catalogue.add.form" class="Catalogue\Form\CatalogueAddForm" />
-        <form name="catalogue.update.form" class="Catalogue\Form\CatalogueUpdateForm" />
-        <form name="catalogue.modification.form" class="Catalogue\Form\CatalogueModificationForm" />
-        <form name="catalogue.creation.form" class="Catalogue\Form\CatalogueCreationForm"/>
         <form name="catalogue.image" class="Catalogue\Form\CatalogueImageForm"/>
         <form name="catalogue.pdf" class="Catalogue\Form\CataloguePdfForm"/>
     </forms>

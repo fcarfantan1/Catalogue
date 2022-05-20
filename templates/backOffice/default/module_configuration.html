@@ -1,3 +1,130 @@
 {block name="main-content"}
-	<a href="{url path='/admin/module/catalogue/create'}">créer un catalogue</a>
+<div class="general-block-decorator">
+	<div class="row">
+		<div class="col-md-12 title title-without-tabs">
+			{intl l='Create the catalog' d='catalogue'}
+		</div>
+	</div>
+</div>
+<div class="general-block-decorator">
+	<div class="row">
+		<div class="col-md-12 title title-without-tabs">
+			{intl l='Publish the catalog' d='catalogue'}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-container">
+				{form name="catalogue.pdf"}
+				<form method="POST" action="{url path="/admin/module/catalogue/upload/pdf"}" {form_enctype}
+					class="clearfix">
+					{form_hidden_fields}
+					
+					{form_field field='import_file'}
+					<div class="form-group {if $error}has-error{/if}">
+						<label for="{$label_attr.for}" class="control-label">{intl l='Publish the new catalog' d='catalogue'}</label>
+						<div class="input-group">
+							<input type="file" id="{$label_attr.for}" {if $required}required="required" {/if}
+								name="{$name}" value="{$value}"
+								title="{intl l='catalogue image' d='catalogue.bo.default'}"
+								placeholder="{intl l='catalogue image' d='catalogue'}" class="form-control">
+							
+						</div>
+					</div>
+					{/form_field}
+					{form_field field='catalog_year'}
+					<label for="{$label_attr.for}" class="control-label" {if $required}required="required" {/if}>{intl l=$label d='catalogue'}</label>
+					<div class="input-group">
+						<input id="{$label_attr.for}" type="number" label="{$label}" name="{$name}" min="2022" max="3000" value="{date('Y')}"></input>
+					</div>
+					{/form_field}
+					<span class="input-group-btn">
+						<input type="submit" class="form-submit-button btn btn-sm btn-success"
+							value="{intl d='catalogue' l='Publish the catalog'}">
+					</span>
+				</form>
+				{/form}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="general-block-decorator">
+	<div class="row">
+		<div class="col-md-12 title title-without-tabs">
+			{intl l='Edit your catalog' d='catalogue'}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-container">
+				{form name="catalogue.image"}
+				<form method="POST" action="{url path="/admin/module/catalogue/upload/image"}" {form_enctype}
+					class="clearfix">
+					{form_hidden_fields}
+					{form_field field='file'}
+					<div class="form-group {if $error}has-error{/if}">
+						<label for="{$label_attr.for}" class="control-label">{intl d='catalogue' l='Display this image in the catalog'}</label>
+						<div class="input-group">
+							<input type="file" id="{$label_attr.for}" {if $required}required="required" {/if}
+								name="{$name}" value="{$value}"
+								title="{intl l='catalogue image' d='catalogue.bo.default'}"
+								placeholder="{intl l='catalogue image' d='catalogue'}" class="form-control">
+							<span class="input-group-btn">
+								<input type="submit" class="form-submit-button btn btn-sm btn-success"
+									value="{intl d='catalogue' l='Display this image in the catalog'}">
+							</span>
+						</div>
+					</div>
+					{/form_field}
+				</form>
+				{/form}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 title title-without-tabs">
+			{intl l='Cover image' d='catalogue'}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-container">
+					{loop name="catalogue.image" type="catalogue_config" width="550" height="200" resize_mode="borders"
+					backend_context="1" lang="$edit_language_id" limit="1"}
+					<div class="well well-sm">
+						<div class="row">
+							<div class="col-md-6">
+								<p>
+									<a href="{$ORIGINAL_IMAGE_URL}" class="thumbnail" target="_blank">
+										<img src="{$IMAGE_URL}" alt="{$ALT}">
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				
+					{/loop}
+					{include
+					file = "includes/inner-form-toolbar.html"
+					hide_save_buttons=true
+					hide_flags = false
+					page_bottom = true
+					}
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+</div>
+{/block}
+{block name="javascript-initialization"}
+{javascripts file='assets/js/bootstrap-editable/bootstrap-editable.js'}
+<script src="{$asset_url}"></script>
+{/javascripts}
+
 {/block}

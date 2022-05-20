@@ -20,5 +20,8 @@ return array(
     'ZipCode' => 'Code Postal',
     'City' => 'Commune',
     'Cover image'=>'Image de couverture',
-    'Publication year' => 'Année de publication'
+    'Publication year' => 'Année de publication',
+    'Create' => 'Créer',
+    'Publish' => 'Publier',
+    'Download a new catalog' => 'Télécharger un nouveau catalogue'
 );
