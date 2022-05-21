@@ -20,20 +20,24 @@ class FrontHook extends BaseHook {
     
     public function onMainNavbarCatalogue(HookRenderEvent $event){
 
-        $htmlContent = sprintf('<li><a href="%s">Télécharger notre catalogue</a></li>',$this->getPdf());
+        $htmlContent = sprintf('<li><a href="%s">Catalogue %s</a></li>',$this->getPdf()['url'],$this->getPdf()['year']);
         $event->add($htmlContent);
     }
     public function getPdf(){
+        $catalogue = new Catalogue();
         $configId = CataloguePdfConfigQuery::create()
             ->select('id')
             ->findOne();
         $document = CataloguePdfDocumentQuery::create()
             ->findOneByConfigId($configId);
             $pdfEvent = new DocumentEvent();
-            $pdfEvent->setSourceFilepath($document->getUploadDir() . DS . $document->getFile())
-            ->setCacheSubdirectory('catalogue');
-            $this->dispatcher->dispatch(TheliaEvents::DOCUMENT_PROCESS, $pdfEvent);
-        return ['url'=>$pdfEvent->getDocumentUrl(),'year'=>$document->getPublicationYear()];
+            if($document!=null){
+                $pdfEvent->setSourceFilepath($catalogue->getDocumentUploadDir() . DS . $document->getFile())
+                ->setCacheSubdirectory('catalogue');
+                $this->dispatcher->dispatch(TheliaEvents::DOCUMENT_PROCESS, $pdfEvent);
+            return ['url'=>$pdfEvent->getDocumentUrl(),'year'=>$document->getPublicationYear()];
+            }
+           return null;
     }
     
 
